@@ -61,9 +61,9 @@ module Dna
         sum = 0
         power = 0
 
-        until pattern.empty?
+        pattern.size.times do
           symbol = pattern[-1]
-          sum +=  symbol_to_number(symbol) * (4**power)
+          sum += symbol_to_number(symbol) * (4**power)
 
           pattern = pattern[0..-2]
           power += 1
@@ -82,6 +82,17 @@ module Dna
         end
 
         ("A" * (k - pattern.size)).concat(pattern)
+      end
+
+      def frequencies(text, k)
+        frequencies = Hash.new(0)
+
+        (0..text.size - k).each do |i|
+          pattern = pattern_to_number(text.slice(i, k))
+          frequencies[pattern] = frequencies[pattern] + 1
+        end
+
+        frequencies
       end
 
       private

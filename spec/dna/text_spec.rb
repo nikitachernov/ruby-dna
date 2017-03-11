@@ -11,7 +11,8 @@ module Dna
     describe "::frequent_words" do
       it "should calculate frequent words" do
         text = "ACGTTGCATGTCGCATGATGCATGAGAGCT"
-        expect(Text.frequent_words(text, 4)).to eq(["CATG", "GCAT"].to_set) end
+        expect(Text.frequent_words(text, 4)).to eq(["CATG", "GCAT"].to_set)
+      end
     end
 
     describe "::pattern_to_number" do
@@ -42,6 +43,25 @@ module Dna
         ]
 
         expect(Text.starting_positions(pattern, text)).to eq(expected)
+      end
+    end
+
+    describe "::frequencies" do
+      it "returns patterns frequencies" do
+        expected = {
+          0 => 2,
+          1 => 1,
+          6 => 2,
+          7 => 2,
+          8 => 1,
+          9 => 2,
+          10 => 1,
+          13 => 1,
+          14 => 1,
+        }
+
+        result = Text.frequencies("ACGCGGCTCTGAAA", 2)
+        expect(result).to eq(expected)
       end
     end
   end
