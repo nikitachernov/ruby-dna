@@ -46,6 +46,17 @@ module Dna
         frequent_patterns
       end
 
+      def starting_positions(pattern, text)
+        positions = []
+
+        (0..text.size - pattern.size).each do |i|
+          slice = text.slice(i, pattern.size)
+          positions.push(i) if slice == pattern
+        end
+
+        positions
+      end
+
       def pattern_to_number(pattern)
         sum = 0
         power = 0
