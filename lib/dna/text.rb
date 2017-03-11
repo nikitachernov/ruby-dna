@@ -1,8 +1,11 @@
 require "set"
+require "dna/text/ext"
 
 module Dna
   module Text
     class << self
+      include Dna::Text::Ext
+
       def count(text, pattern)
         count = 0
 
@@ -57,21 +60,6 @@ module Dna
         positions
       end
 
-      def pattern_to_number(pattern)
-        sum = 0
-        power = 0
-
-        pattern.size.times do
-          symbol = pattern[-1]
-          sum += symbol_to_number(symbol) * (4**power)
-
-          pattern = pattern[0..-2]
-          power += 1
-        end
-
-        sum
-      end
-
       def number_to_pattern(number, k)
         pattern = ""
 
@@ -96,15 +84,6 @@ module Dna
       end
 
       private
-
-      def symbol_to_number(symbol)
-        case symbol
-        when "A" then 0
-        when "C" then 1
-        when "G" then 2
-        when "T" then 3
-        end
-      end
 
       def number_to_symbol(number)
         case number
